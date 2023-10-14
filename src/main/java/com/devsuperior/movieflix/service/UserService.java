@@ -15,6 +15,7 @@ import com.devsuperior.movieflix.entities.User;
 import com.devsuperior.movieflix.repositories.UserRepository;
 import com.devsuperior.movieflix.service.exception.UnauthorizedException;
 
+@Service
 public class UserService implements UserDetailsService {
 
     private static Logger logger = LoggerFactory.getLogger(UserService.class);
@@ -40,6 +41,6 @@ public class UserService implements UserDetailsService {
             throw new UsernameNotFoundException("Email not found");
         }
         logger.info("User found: " + username);
-        return (UserDetails) user;
+        return user;
     }
 }
