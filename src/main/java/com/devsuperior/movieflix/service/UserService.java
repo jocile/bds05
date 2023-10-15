@@ -43,4 +43,15 @@ public class UserService implements UserDetailsService {
         logger.info("User found: " + username);
         return user;
     }
+
+    @Transactional(readOnly = true)
+    public UserDTO getProfileAuthenticated() {
+        try {
+            String username = SecurityContextHolder.getContext().getAuthentication().getName();
+            User user = repository.findByEmail(username);
+            return new UserDTO(user);
+        } catch (Exception e) {
+            throw new UnauthorizedException("Invalid user");
+        }
+    }
 }
